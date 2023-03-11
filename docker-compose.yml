@@ -1,0 +1,76 @@
+version: '3'
+volumes:
+  pgdata:
+    driver: local
+
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    expose:
+      - 8080
+    ports:
+      - "443:8080"
+      - "80:80"
+    volumes:
+      - ./t_and_d/static:/srv/www/t_and_d/static
+      - ./t_and_d/media:/srv/www/t_and_d/media
+      - ./t_and_d/logs:/srv/www/t_and_d/logs
+      - ./docker/nginx:/etc/nginx/conf.d
+      # - /etc/ssl/:/etc/ssl
+    depends_on:
+      - python
+
+  python:
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    volumes:
+      - ./t_and_d:/srv/www/t_and_d
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    command: "gunicorn --log-level DEBUG -c gunicorn.py t_and_d.wsgi"
+
+  postgres:
+    image: postgres:15
+    ports:
+      - 2619:5432
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    env_file:
+      - .env
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - 1813:80
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    env_file:
+      - .env
