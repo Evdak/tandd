@@ -15,6 +15,7 @@ DEBUG = env.bool('DEBUG', True)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', default='')
+TELEGRAM_SECRET_KEY = env.str('TELEGRAM_SECRET_KEY', default='')
 
 DJANGO_APPS = [
     'jazzmin',
@@ -30,9 +31,10 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     'offers',
+    'tgbot',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + ['django_cleanup.apps.CleanupConfig']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -4,6 +4,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="apple-touch-icon" sizes="180x180" href='{% static "/img/apple-touch-icon.png" %}'>
+    <link rel="icon" type="image/png" sizes="32x32" href='{% static "/img/favicon-32x32.png" %}'>
+    <link rel="icon" type="image/png" sizes="16x16" href='{% static "/img/favicon-16x16.png" %}'>
+    <link rel="shortcut icon" type="image/png" href="{% static '/img/favicon.ico' %}" />
+    <link rel="manifest" href='{% static "/site.webmanifest" %}'>
+
     <title>{% block title %}{% endblock %}</title>
     <script src="https://kit.fontawesome.com/04fb3b5b6c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">

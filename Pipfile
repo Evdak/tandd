@@ -11,6 +11,9 @@ gunicorn = "*"
 gevent = "*"
 django-jazzmin = "*"
 django-bootstrap5 = "*"
+pytelegrambotapi = "*"
+pillow = "*"
+django-cleanup = "*"
 
 [dev-packages]
 autopep8 = "*"

@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () { // Аналог $(do
     // };
 
     $("#phone2").mask("+7 (999) 999-99-99");
+    $("#phone-1").mask("+7 (999) 999-99-99");
 });
 
 

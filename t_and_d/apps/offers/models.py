@@ -1,8 +1,21 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 
 
 class OfferPhoto(models.Model):
-    file = models.FileField('Файл с фото', upload_to='offer_photo')
+    file = models.ImageField('Файл с фото', upload_to='offer_photo')
+
+    def image_preview(self):
+        return mark_safe(
+            str(self)
+        )
+
+    def __str__(self) -> str:
+        return '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
+            url=self.file.url,
+            width=self.file.width,
+            height=self.file.height,
+        )
 
     class Meta:
         verbose_name = "Фото объектов"
@@ -10,7 +23,19 @@ class OfferPhoto(models.Model):
 
 
 class OfferPhotoMain(models.Model):
-    file = models.FileField('Файл с фото', upload_to='offer_photo_main')
+    file = models.ImageField('Файл с фото', upload_to='offer_photo_main')
+
+    def image_preview(self):
+        return mark_safe(
+            str(self)
+        )
+
+    def __str__(self) -> str:
+        return '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
+            url=self.file.url,
+            width=self.file.width,
+            height=self.file.height,
+        )
 
     class Meta:
         verbose_name = "Фото объектов главные"
@@ -18,7 +43,19 @@ class OfferPhotoMain(models.Model):
 
 
 class OfferPhotoPlan(models.Model):
-    file = models.FileField('Файл с фото', upload_to='offer_photo_plan')
+    file = models.ImageField('Файл с фото', upload_to='offer_photo_plan')
+
+    def image_preview(self):
+        return mark_safe(
+            str(self)
+        )
+
+    def __str__(self) -> str:
+        return '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
+            url=self.file.url,
+            width=self.file.width,
+            height=self.file.height,
+        )
 
     class Meta:
         verbose_name = "Фото планов объектов"
@@ -154,3 +191,52 @@ class Offer(models.Model):
 
     def get_address(self):
         return self.address.replace(" ", '+') if self.address else "Казань"
+
+    def image_preview(self):
+        return mark_safe(
+            '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
+                url=self.main_photo.file.url,
+                width=self.main_photo.file.width,
+                height=self.main_photo.file.height,
+            )
+        )
+
+
+class Request(models.Model):
+    name = models.CharField(
+        'Имя',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    phone = models.CharField(
+        'Телефон',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    email = models.CharField(
+        'Email',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    message = models.CharField(
+        'Сообщение',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    time_created = models.DateTimeField(
+        editable=False,
+        auto_now_add=True,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self) -> str:
+        return f"{self.name if self.name else ''} {self.phone if self.phone else ''} {self.email if self.email else ''}"
+
+    class Meta:
+        verbose_name = "Заявка"
+        verbose_name_plural = "Заявки"

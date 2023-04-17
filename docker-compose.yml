@@ -34,7 +34,7 @@ services:
       - 8000:8000
     env_file:
       - .env
-    command: "gunicorn --log-level DEBUG -c gunicorn.py t_and_d.wsgi"
+    command: /bin/sh -c "start.sh"
 
   postgres:
     image: postgres:15
