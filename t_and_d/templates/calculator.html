@@ -1,0 +1,675 @@
+<!--Ипотечный калькулятор-->
+<div class="row mb-5">
+    <div class="col-md-8 col-xl-6 text-center mx-auto">
+        <h2>Калькулятор ипотеки</h2>
+    </div>
+</div>
+<section id="mortgage-calculator-section">
+    <div class="container">
+        <div class="row mortgage-calculator">
+            <div class="col-md-8 col-xs-12">
+                <div class="form-group">
+                    <label for="object-price">Стоимость недвижимости</label>
+                    <div class="range-output">
+                        <input class="money text-input" id="object-price-output">
+                        <input type="hidden" id="object-price-hidden">
+                    </div>
+                    <input type="range" list="object-price-tickmarks" min="500000" max="10000000" value="3500000"
+                        class="form-control-range" id="object-price">
+                    <datalist id="object-price-tickmarks">
+                        <option value="500000" label="500 тыс.">
+                        <option value="1000000">
+                        <option value="1500000">
+                        <option value="2000000">
+                        <option value="2500000">
+                        <option value="3000000">
+                        <option value="3500000">
+                        <option value="4000000">
+                        <option value="4500000">
+                        <option value="5000000">
+                        <option value="5500000">
+                        <option value="6000000">
+                        <option value="6500000">
+                        <option value="7000000">
+                        <option value="7500000">
+                        <option value="8000000">
+                        <option value="8500000">
+                        <option value="9000000">
+                        <option value="9500000">
+                        <option value="10000000" label="10 млн.">
+                    </datalist>
+                </div>
+
+                <div class="form-group">
+                    <label for="first-payment">Первоначальный взнос</label>
+                    <div class="range-output">
+                        <input class="money text-input" name="" id="first-payment-output">
+                        <input type="hidden" id="first-payment-hidden">
+                    </div>
+                    <input type="range" list="first-payment-tickmarks" min="300000" max="5000000" value="1000000"
+                        class="form-control-range" id="first-payment">
+                    <datalist id="first-payment-tickmarks">
+                        <option value="300000" label="300 тыс.">
+                        <option value="500000">
+                        <option value="1000000">
+                        <option value="1500000">
+                        <option value="2000000">
+                        <option value="2500000">
+                        <option value="3000000">
+                        <option value="4500000">
+                        <option value="5000000" label="5 млн.">
+                    </datalist>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="years">Срок кредита</label>
+                    <div class="range-output">
+                        <input class="text-input" name="" id="years-output">
+                    </div>
+                    <input type="range" list="years-tickmarks" min="1" max="30" value="20" class="form-control-range"
+                        id="years">
+                    <datalist id="tickmarks years-tickmarks">
+                        <option value="1" label="1 год">
+                        <option value="30" label="30 лет">
+                    </datalist>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="percent">Ипотечные программы</label>
+                    <p>Выберите ипотечную программу или введите % ставку</p>
+                    <div id="percent">
+                        <select id="bank-select">
+                            <option value="6.5" selected>Льготная ипотека для новостроек</option>
+                            <option value="4.9">Семейная ипотека</option>
+                            <option value="2.7">Сельская ипотека</option>
+                            <option value="6.5">Покупка квартиры в новостройке</option>
+                            <option value="8.9">Покупка вторичного жилья</option>
+                        </select>
+                        <div class="bank-percent">
+                            <input class="text-input-percent" id="bank-percent-span" value="6.5">%
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-4 col-xs-12">
+                <div class="mc-item mc-item-first">
+                    <p>Сумма кредита</p>
+                    <p class="mc-item-number"><span id="credit-summ">2 500 000,00</span> ₽</p>
+                    <hr>
+                </div>
+                <div class="mc-item">
+                    <p>Ежемесячный платеж</p>
+                    <p class="mc-item-number"><span id="month-pay">18 639,33</span> ₽</p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Калькулятор ипотеки */
+    #mortgage-calculator-section {
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    #mortgage-calculator-section>.container {
+        background-color: #302A2A;
+        border-radius: 10px;
+    }
+
+    .mortgage-calculator {
+        padding: 5%;
+        border-radius: 4px;
+        box-shadow: 0px 2px 13px rgba(0, 0, 0, 0.08);
+    }
+
+    .mortgage-calculator #credit-purpose {
+        width: 100%;
+        background: #fff;
+        border: 1px solid #ccc;
+        height: 45px;
+        margin-bottom: 10px;
+    }
+
+    .mortgage-calculator label {
+        font-size: 16px;
+        color: #333;
+    }
+
+    .mortgage-calculator .range-output span {
+        color: #333;
+    }
+
+    .mortgage-calculator datalist {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 7px;
+    }
+
+    .mortgage-calculator datalist option {
+        display: inline;
+        color: #ccc;
+        font-weight: 300;
+        font-size: 12px;
+    }
+
+    .money,
+    .text-input {
+        width: 100%;
+        border: none;
+    }
+
+    .text-input-percent {
+        width: 60%;
+        border: none;
+    }
+
+    .mortgage-calculator input[type="range"] {
+        width: 100%;
+        height: 3px;
+        border-radius: 4px;
+        background: #00b3ff;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .mortgage-calculator input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #00b3ff;
+        cursor: pointer;
+    }
+
+    .mortgage-calculator input[type="range"]::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+
+    .mortgage-calculator .range-output {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-bottom: none;
+        border-radius: 4px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .mortgage-calculator #percent {
+        display: block;
+    }
+
+    .mortgage-calculator #percent #bank-select {
+        width: 70%;
+        float: left;
+        background: #fff;
+        border: 1px solid #ccc;
+        height: 42px;
+    }
+
+    .mortgage-calculator #percent .bank-percent {
+        width: 25%;
+        float: left;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9px;
+        margin-left: 5%;
+        text-align: center;
+        color: #000000;
+        font-size: 16px;
+    }
+
+    .mortgage-calculator .mc-item-first {
+        margin-top: 27px;
+    }
+
+    .mortgage-calculator .mc-item p {
+        line-height: 1;
+        color: #FFFFFF;
+    }
+
+    .mortgage-calculator .mc-item p.mc-item-number {
+        color: #ffee95;
+        font-size: 22px;
+    }
+
+    .mortgage-calculator .mc-item-bottom {
+        margin-top: 40px;
+    }
+
+    .mortgage-calculator .mc-item-bottom p {
+        font-size: 18px;
+        color: #FFFFFF;
+        font-weight: 500;
+    }
+
+    .mortgage-calculator .mc-item-bottom button {
+        background: #00b3ff;
+        color: #fefefe;
+        border-radius: 4px;
+        padding: 13px 20px;
+        border: none;
+    }
+
+    .form-group label,
+    .form-group p {
+        color: #FFF;
+    }
+</style>
+
+<script>
+    function btnClicked() {
+        document.getElementById('ipoteka-modal-form-span').innerHTML = "Льготная ипотека для новостроек от 6,5%";
+        document.getElementById('mortgage-program').value = "Льготная ипотека для новостроек от 6,5%";
+    }
+    function btn2Clicked() {
+        document.getElementById('ipoteka-modal-form-span').innerHTML = "Семейная ипотека от 4,9%";
+        document.getElementById('mortgage-program').value = "Семейная ипотека от 4,9%";
+    }
+    function btn3Clicked() {
+        document.getElementById('ipoteka-modal-form-span').innerHTML = "Сельская ипотека от 2,7%";
+        document.getElementById('mortgage-program').value = "Сельская ипотека от 2,7%";
+    }
+    function btn4Clicked() {
+        document.getElementById('ipoteka-modal-form-span').innerHTML = "Покупка квартиры в новосторойке от 3,7%";
+        document.getElementById('mortgage-program').value = "Покупка квартиры в новосторойке от 3,7%";
+    }
+    function btn5Clicked() {
+        document.getElementById('ipoteka-modal-form-span').innerHTML = "Покупка вторичного жилья от 8,9%";
+        document.getElementById('mortgage-program').value = "Покупка вторичного жилья от 8,9%";
+    }
+    //Для калькулятора
+
+    //округление
+    var rounded = function (number) {
+        return +number.toFixed(2);
+    }
+
+    //вывод в денежный формат
+    var moneyFormat = function (n) {
+        return parseFloat(n).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1 ").replace('.', ',');
+    }
+
+    //Переменные вывода значений в правом столбце
+    var creditSumm = document.getElementById("credit-summ");
+    var credit;
+
+    var monthPay = document.getElementById("month-pay");
+    var monthly;
+
+    var overPay;
+    var overPayWithUs;
+    var yourSafe = document.getElementById("your-safe");
+    var monthPayWithUs = document.getElementById("month-pay-with-us");
+
+    //Переменные для расчета ежемесячного платежа
+    var monthSumm;
+    var monthPercent;
+    var ann;
+    var monthPaySumm;
+
+
+
+    //range стоимости объекта
+    var slider = document.getElementById("object-price");
+    var hidden = document.getElementById("object-price-hidden");
+    var output = document.getElementById("object-price-output");
+
+    output.value = moneyFormat(slider.value);
+
+    slider.oninput = function () {
+        hidden.value = this.value;
+        output.value = moneyFormat(hidden.value);
+        //Подсчет суммы кредита
+        creditSumm.innerHTML = moneyFormat(this.value - firstPaymentSlider.value);
+        credit = this.value - firstPaymentSlider.value;
+        if (credit <= 0) {
+            creditSumm.innerHTML = "0,00";
+        }
+
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+
+
+    }
+
+    output.oninput = function () {
+        hidden.value = this.value.replace(/ /g, "").replace(",00", "");
+        slider.value = hidden.value;
+
+
+        //Подсчет суммы кредита
+        creditSumm.innerHTML = moneyFormat(hidden.value - firstPaymentSlider.value);
+        credit = hidden.value - firstPaymentSlider.value;
+        if (credit <= 0) {
+            creditSumm.innerHTML = "0,00";
+        }
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+    }
+
+    //range первоначального взноса
+    var firstPaymentSlider = document.getElementById("first-payment");
+    var firstPaymentOutput = document.getElementById("first-payment-output");
+    var firstHidden = document.getElementById("first-payment-hidden");
+    firstPaymentOutput.value = moneyFormat(firstPaymentSlider.value);
+
+    firstPaymentSlider.oninput = function () {
+
+        firstHidden.value = this.value;
+        firstPaymentOutput.value = moneyFormat(firstHidden.value);
+
+        //Подсчет суммы кредита
+        creditSumm.innerHTML = moneyFormat(slider.value - this.value);
+        credit = slider.value - this.value;
+        if (credit <= 0) {
+            creditSumm.innerHTML = "0,00";
+        }
+
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+
+    }
+
+    firstPaymentOutput.oninput = function () {
+        firstHidden.value = this.value.replace(/ /g, "").replace(",00", "");
+        firstPaymentSlider.value = firstHidden.value;
+
+        //Подсчет суммы кредита
+        creditSumm.innerHTML = moneyFormat(slider.value - firstHidden.value);
+        credit = slider.value - firstHidden.value;
+        if (credit <= 0) {
+            creditSumm.innerHTML = "0,00";
+        }
+
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+    }
+
+    //range срока кредита
+    var years = document.getElementById("years");
+    var yearsOutput = document.getElementById("years-output");
+    yearsOutput.value = years.value;
+
+    years.oninput = function () {
+        yearsOutput.value = this.value;
+
+        credit = slider.value - firstPaymentSlider.value;
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) * monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+
+    }
+
+    yearsOutput.oninput = function () {
+        years.value = this.value;
+        credit = slider.value - firstPaymentSlider.value;
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+    }
+    //Изменение процентной ставки
+
+    var percentSelect = document.getElementById("bank-select");
+    var bankPercent = document.getElementById("bank-percent-span");
+
+    percentSelect.onchange = function () {
+        bankPercent.value = this.options[this.selectedIndex].value;
+
+        credit = slider.value - firstPaymentSlider.value;
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (percentSelect.options[percentSelect.selectedIndex].value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((percentSelect.options[percentSelect.selectedIndex].value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+    }
+
+    bankPercent.oninput = function () {
+        this.value = this.value.replace(",", '.');
+        credit = slider.value - firstPaymentSlider.value;
+        //Подсчет ежемесячного платежа
+        monthSumm = years.value * 12;
+        monthPercent = (this.value / 12) / 100;
+        ann = (monthPercent * ((1 + monthPercent) ** monthSumm)) / (((1 + monthPercent) ** monthSumm) - 1);
+        monthPaySumm = credit * ann;
+
+        monthPay.innerHTML = moneyFormat(monthPaySumm);
+        monthly = rounded(monthPaySumm);
+        if (monthPaySumm <= 0) {
+            monthPay.innerHTML = "0,00";
+        }
+
+        //Подсчет переплаты по кредиту
+        overPay = rounded(monthly * monthSumm - credit);
+
+        //Подсчет переплаты по кредиту с нами
+        var monthPercentWithUs = ((this.value - 0.7) / 12) / 100;
+        var annWithUs = (monthPercentWithUs * ((1 + monthPercentWithUs) ** monthSumm)) / (((1 + monthPercentWithUs) ** monthSumm) - 1);
+        var monthPaySummWithUs = credit * annWithUs;
+        overPayWithUs = rounded(monthPaySummWithUs * monthSumm - credit);
+
+        //Подсчет сэкономленной суммы
+        monthPayWithUs.innerHTML = moneyFormat(monthPaySummWithUs);
+        yourSafe.innerHTML = moneyFormat(overPay - overPayWithUs);
+        if (monthPaySummWithUs <= 0) {
+            monthPayWithUs.innerHTML = "0,00";
+        }
+
+        if (overPay - overPayWithUs <= 0) {
+            yourSafe.innerHTML = "0,00";
+        }
+    }
+
+</script>

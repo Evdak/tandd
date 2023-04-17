@@ -106,4 +106,7 @@ venv.bak/
 .idea/
 celerybeat-*
 database.db
-t_and_d/.DS_Store
+.DS_Store
+
+/data
+t_and_d/media

@@ -14,6 +14,8 @@ SECRET_KEY = env.str('SECRET_KEY', '!!! SET YOUR SECRET_KEY !!!')
 DEBUG = env.bool('DEBUG', True)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
+TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', default='')
+
 DJANGO_APPS = [
     'jazzmin',
     'django_bootstrap5',
@@ -27,6 +29,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
+    'offers',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
@@ -63,9 +66,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 't_and_d.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("DB_ENGINE", "django.db.backends.sqlite3"),
@@ -76,9 +76,6 @@ DATABASES = {
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -96,9 +93,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
-
 LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -107,11 +101,6 @@ USE_I18N = True
 
 USE_L10N = True
 
-# USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
 

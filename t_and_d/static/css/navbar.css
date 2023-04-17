@@ -1,0 +1,24 @@
+#navbar {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    margin: 1rem;
+}
+
+#navbar #order-a-call {
+    background: #00000000;
+    border-width: 1px;
+    border-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#navbar #phone-number {
+    margin-bottom: 0px;
+    margin-right: 1rem;
+}
+
+.td-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+}

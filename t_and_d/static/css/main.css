@@ -1,0 +1,244 @@
+#main-photo {
+    position: relative;
+    max-height: 1080px;
+    height: 100vh;
+    z-index: 1000;
+}
+
+#main-photo>* {
+    position: relative !important;
+    z-index: 1000;
+}
+
+#main-photo::before {
+    content: "";
+    background: url('/media/img/main.jpg') center / cover no-repeat;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
+}
+
+
+@media (max-width: 991.98px) {
+    #main-photo::before {
+        opacity: 0.5;
+        filter: blur(5px);
+    }
+}
+
+@media (min-width: 991.98px) {
+    .align-items-xl-start {
+        align-items: start !important;
+    }
+}
+
+#main-photo-col-1 {
+    color: #2f2f2f;
+}
+
+#main-photo-col-1-heading {
+    padding-right: 0px;
+    font-size: 3.5rem;
+}
+
+#main-photo-col-1-row {
+    margin: 0;
+    font-size: 1rem;
+}
+
+#main-photo-col-1-row .font-size-icon {
+    font-size: 30px;
+}
+
+.main-photo-col-1-row-p {
+    margin-bottom: 0 !important;
+    margin-left: 15px;
+    padding-left: 0px;
+}
+
+.btn-yellow {
+    margin-top: 10px;
+    background: linear-gradient(232deg, #ffee97, #aba568);
+    box-shadow: 0px 4px 4px #000000;
+    color: #4E4218 !important;
+    border-style: none !important;
+}
+
+.service-card-wrapper {
+    border-style: none !important;
+    border-radius: 32px !important;
+    box-shadow: 0px 17px 18px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.service-card-wrapper, .service-card {
+    height: 8rem !important;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.service-card p {
+    margin-bottom: 0 !important;
+    margin-left: 1rem;
+    width: 100%;
+    min-height: 30%;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+}
+
+.service-card .service-card-icon {
+    width: 4rem;
+    height: 4rem;
+    z-index: 100;
+}
+
+.service-card-wrapper .yellow-circle {
+    background: #F0E298;
+    box-shadow: inset 0px 21px 17px rgba(255, 255, 255, 0.25);
+    position: absolute;
+    width: 6.5rem;
+    height: 6.5rem;
+    bottom: -15px;
+    left: -15px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 50;
+}
+
+.service-card-wrapper .yellow-circle:before {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-color: #F0E298;
+    position: absolute;
+    left: -25px;
+    top: -25px;
+    border-radius: 50%;
+    z-index: 50;
+}
+
+
+
+
+.house-card .card-body {
+    background-color: #302A2A;
+    color: var(--bs-white);
+}
+
+.house-card .card-body h4.house-properties-title {
+    color: #C3C3C3;
+}
+
+.house-card .card-body p.house-properties-body {}
+
+.btn.btn-yellow {
+    background: #FFEE95;
+    color: var(--bs-black);
+    border-style: none;
+}
+
+.btn.tab {
+    margin: 1rem;
+    border-radius: 10px !important;
+}
+
+.fit-cover {
+    object-fit: cover;
+}
+
+.horizontal-scrollable {
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    scroll-behavior: smooth;
+}
+
+.btn-pagination {
+    width: 10rem;
+    height: auto;
+    padding: 1rem !important;
+    font-size: x-large !important;
+}
+
+#contact-form-1 .card-body {
+    border: solid 5px;
+    border-color: #302a2a;
+    border-radius: 10px;
+}
+
+#contact-form-1 .btn {
+    margin: 0;
+}
+
+.bs-icon {
+    --bs-icon-size: .75rem;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--bs-icon-size);
+    width: calc(var(--bs-icon-size) * 2);
+    height: calc(var(--bs-icon-size) * 2);
+    color: var(--bs-primary);
+}
+
+.bs-icon-xs {
+    --bs-icon-size: 1rem;
+    width: calc(var(--bs-icon-size) * 1.5);
+    height: calc(var(--bs-icon-size) * 1.5);
+}
+
+.bs-icon-sm {
+    --bs-icon-size: 1rem;
+}
+
+.bs-icon-md {
+    --bs-icon-size: 1.5rem;
+}
+
+.bs-icon-lg {
+    --bs-icon-size: 2rem;
+}
+
+.bs-icon-xl {
+    --bs-icon-size: 2.5rem;
+}
+
+.bs-icon.bs-icon-primary {
+    color: var(--bs-white);
+    background: var(--bs-primary);
+}
+
+.bs-icon.bs-icon-primary-light {
+    color: var(--bs-primary);
+    background: rgba(var(--bs-primary-rgb), .2);
+}
+
+.bs-icon.bs-icon-semi-white {
+    color: var(--bs-primary);
+    background: rgba(255, 255, 255, .5);
+}
+
+.bs-icon.bs-icon-rounded {
+    border-radius: .5rem;
+}
+
+.bs-icon.bs-icon-circle {
+    border-radius: 50%;
+}
+
+#contact-form-2 .bs-icon-md {
+    background: #000000;
+}
+
+#contact-form-2 .bi {
+    color: #ffee95 !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}

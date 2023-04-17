@@ -1,0 +1,29 @@
+.owl-carousel .owl-dots .owl-dot.active span,
+.owl-carousel .owl-dots .owl-dot:hover span {
+    background: #ffee95 !important;
+    transform: translate3d(0px, -50%, 0px) scale(0.7) !important;
+}
+
+.owl-carousel .owl-dots {
+    display: inline-block !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+.owl-carousel .owl-dots .owl-dot {
+    display: inline-block !important;
+    margin-top: 2rem !important;
+}
+
+.owl-carousel .owl-dots .owl-dot span {
+    background: #ffee95 !important;
+    display: inline-block !important;
+    height: 2.5rem !important;
+    margin: 0 2px 5px !important;
+    transform: translate3d(0px, -50%, 0px) scale(0.3) !important;
+    transform-origin: 50% 50% 0 !important;
+    transition: all 250ms ease-out 0s !important;
+    width: 2.5rem !important;
+    border-radius: 50% !important;
+    border: 1px solid #000 !important;
+}

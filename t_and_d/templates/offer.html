@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+T&D | {{offer.title}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link href='{% static "/css/offer.css" %}' rel='stylesheet' type='text/css'>
+<!-- main-photo -->
+<div class="container p-5 rounded" id="offer-wrapper">
+    <div class="row p-1">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+            <div class="btn-group d-flex justify-content-xl-center mb-3" role="group" id="offer-tabs">
+                {% if offer.plan_photo.first %}
+                <button class="btn mx-3" type="button" onclick="changeTab(this, 'plan-photos')">План</button>
+                {% endif %}
+
+                {% if offer.photo.first %}
+                <button class="btn mx-3 active" type="button" onclick="changeTab(this, 'photos')">Фото</button>
+                {% endif %}
+
+                {% if offer.address %}
+                <button class="btn mx-3" type="button" onclick="changeTab(this, 'map')">Карта</button>
+                {% endif %}
+            </div>
+
+            {% if offer.photo %}
+            {% include "carousel.html" with photos=offer.photo.all block_id="photos"%}
+            {% endif %}
+
+            {% if offer.plan_photo %}
+            {% include "carousel.html" with photos=offer.plan_photo.all block_id="plan-photos"%}
+            {% endif %}
+
+            {% if offer.address %}
+            {% include "map.html" with address=offer.get_address%}
+            {% endif %}
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-xxl-4">
+            <div class="row">
+                <div class="col">
+                    <h3 class="text-light">{{offer.title}}</h3>
+                    <h5 class="text-light">Основное</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                {% if offer.get_price %}
+                                <tr class="text-light">
+                                    <td>Цена</td>
+                                    <td>{{offer.get_price}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if offer.get_house_area %}
+                                <tr class="text-light">
+                                    <td>Площадь дома</td>
+                                    <td>{{offer.get_house_area}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if offer.get_territory_area %}
+                                <tr class="text-light">
+                                    <td>Площадь земли</td>
+                                    <td>{{offer.get_territory_area}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if offer.room_count %}
+                                <tr class="text-light">
+                                    <td>Количество комнат</td>
+                                    <td>{{offer.room_count}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if offer.get_exit_to_the_terrace %}
+                                <tr class="text-light">
+                                    <td>Выход на террасу</td>
+                                    <td>{{offer.get_exit_to_the_terrace}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if offer.get_deadline %}
+                                <tr class="text-light">
+                                    <td>Сроки работ</td>
+                                    <td>{{offer.get_deadline}}</td>
+                                </tr>
+                                {% endif %}
+                                {% if offer.finishing %}
+                                <tr class="text-light">
+                                    <td>Отделка</td>
+                                    <td>{{offer.finishing}}</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="text-light">Описание</h5>
+                    <h6 class="text-light">{{offer.description}}</h6>
+
+                    <button class="btn btn-primary btn-lg mt-3" type="button"
+                        style="color: #302a2a;background: #ffee95;">Связаться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('#owl-plan-photos, #owl-map').hide();
+    });
+
+    function changeTab(btn, tab) {
+        if ($(btn).hasClass('active')) { return }
+        console.log(btn);
+
+        $('#offer-tabs .btn.active').removeClass('active');
+        $(`#owl-plan-photos, #owl-map, #owl-photos`).hide();
+        $(`#owl-${tab}`).show();
+        $(btn).addClass('active');
+    }
+
+    $(document).ready(function () {
+        $('.modal-image').on('click', function (event) {
+            event.preventDefault();
+            console.log(this);
+            var image = $(this).find('img');
+            var imageUrl = $(this).attr('src');
+            var modalContent = $('<div>').addClass('modal-content');
+            var modalBody = $('<div>').addClass('modal-body').append($('<img class="img-fluid">').attr('src', imageUrl).attr('alt', image.attr('alt')));
+            modalContent.append(modalBody);
+            var modalDialog = $('<div>').addClass('modal-dialog modal-dialog-centered').append(modalContent);
+            var modal = $('<div>').addClass('modal fade').attr('id', 'exampleModal').attr('tabindex', '-1').attr('aria-labelledby', 'exampleModalLabel').attr('aria-hidden', 'true').append(modalDialog);
+            $('body').append(modal);
+            $('#exampleModal').modal('show');
+
+            document.querySelector('#exampleModal').addEventListener('hidden.bs.modal', event => {
+                document.querySelector('#exampleModal').remove();
+            })
+        });
+    });
+
+</script>
+
+{% endblock %}
