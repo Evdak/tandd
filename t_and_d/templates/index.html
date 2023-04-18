@@ -132,25 +132,32 @@ T&D | Главная
                         <div class="card-body p-4">
                             <h3 class="card-title">{{ offer.get_price }}</h3>
                             <div class="row">
+                                {% if offer.room_count %}
                                 <div class="col">
                                     <h4 class="text-start house-properties-title">Комнат</h4>
                                     <p class="house-properties-body text-white">{{ offer.room_count }}</p>
                                 </div>
+                                {% endif %}
+                                {% if offer.floor_count %}
                                 <div class="col">
                                     <h4 class="text-start house-properties-title">Этажей</h4>
                                     <p class="house-properties-body text-white">{{ offer.floor_count }}</p>
                                 </div>
+                                {% endif %}
                             </div>
                             <div class="row">
+                                {% if offer.get_house_area %}
                                 <div class="col">
                                     <h4 class="text-start house-properties-title">Площадь</h4>
                                     <p class="house-properties-body text-white">{{ offer.get_house_area }}</p>
                                 </div>
+                                {% endif %}
+                                {% if offer.address %}
                                 <div class="col">
                                     <h4 class="text-start house-properties-title">Адрес</h4>
-                                    <p class="house-properties-body text-white">ул. Пушкина, д.
-                                        3</p>
+                                    <p class="house-properties-body text-white">{{ offer.address }}</p>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
