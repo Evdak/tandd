@@ -38,11 +38,17 @@ if __name__ == '__main__':
                 user.save()
                 bot.send_message(message.from_user.id, "Подписан на входящие заявки")
 
+            elif msg == f"/subscribe":
+                bot.send_message(message.from_user.id, "Добавьте секретный ключ")
+
             elif msg == f"/unsubscribe {TELEGRAM_SECRET_KEY}":
                 logger.warning(f'DELETE ADMIN: {message.from_user.id}:{message.from_user.username}')
                 user.is_admin = False
                 user.save()
                 bot.send_message(message.from_user.id, "Отписан от входящих заявок")
+
+            elif msg == f"/unsubscribe":
+                bot.send_message(message.from_user.id, "Добавьте секретный ключ")
 
             else:
                 bot.send_message(message.from_user.id, "Я тебя не понимаю")
