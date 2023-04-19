@@ -47,7 +47,7 @@ def contact_form_view(request: HttpRequest):
     )
     _request.save()
 
-    _msg = f"""🔥НОВАЯ ЗАЯВКА {_request.id}🔥\n\---------\n👤Имя: {name}\n📞Телефон: {phone}\n📧Email: {email}\nСообщение: {message}\n---------\n"""
+    _msg = f"""🔥НОВАЯ ЗАЯВКА {_request.id}🔥\n---------\n👤Имя: {name}\n📞Телефон: {phone}\n📧Email: {email}\nСообщение: {message}\n---------\n"""
 
     for user in tgbot_models.TGUser.objects.filter(is_admin=True).all():
         bot.send_message(
