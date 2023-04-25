@@ -59,14 +59,6 @@
     padding-left: 0px;
 }
 
-.btn-yellow {
-    margin-top: 10px;
-    background: linear-gradient(232deg, #ffee97, #aba568);
-    box-shadow: 0px 4px 4px #000000;
-    color: #4E4218 !important;
-    border-style: none !important;
-}
-
 .service-card-wrapper {
     border-style: none !important;
     border-radius: 32px !important;
