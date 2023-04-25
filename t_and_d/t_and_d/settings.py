@@ -13,6 +13,7 @@ SECRET_KEY = env.str('SECRET_KEY', '!!! SET YOUR SECRET_KEY !!!')
 
 DEBUG = env.bool('DEBUG', True)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 
 TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', default='')
 TELEGRAM_SECRET_KEY = env.str('TELEGRAM_SECRET_KEY', default='')
