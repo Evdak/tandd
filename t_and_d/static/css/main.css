@@ -12,7 +12,7 @@
 
 #main-photo::before {
     content: "";
-    background: url('/media/img/main.jpg') center / cover no-repeat;
+    background: url('/static/img/main.jpg') center / cover no-repeat;
     position: absolute;
     top: 0px;
     right: 0px;

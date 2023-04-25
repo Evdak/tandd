@@ -17,7 +17,7 @@ services:
       - ./t_and_d/media:/srv/www/t_and_d/media
       - ./t_and_d/logs:/srv/www/t_and_d/logs
       - ./docker/nginx:/etc/nginx/conf.d
-      # - /etc/ssl/:/etc/ssl
+      - /etc/ssl/:/etc/ssl
     depends_on:
       - python
 
