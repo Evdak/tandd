@@ -228,6 +228,7 @@ class Request(models.Model):
         blank=True,
     )
     time_created = models.DateTimeField(
+        'Дата создания',
         editable=False,
         auto_now_add=True,
         null=True,
