@@ -72,11 +72,11 @@ class Offer(models.Model):
         'Цена',
     )
 
-    house_area = models.PositiveIntegerField(
-        'Площадь дома',
+    house_area = models.FloatField(
+        'Площадь дома (м²)',
     )
 
-    territory_area = models.PositiveIntegerField(
+    territory_area = models.FloatField(
         'Площадь земли',
     )
 
@@ -104,7 +104,7 @@ class Offer(models.Model):
         'Выход на террасу',
     )
 
-    deadline = models.PositiveIntegerField(
+    deadline = models.FloatField(
         'Сроки работ',
     )
 
