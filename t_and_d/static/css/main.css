@@ -114,8 +114,13 @@
     z-index: 50;
 }
 
+.house-card, .service-card-wrapper {
+    transition: transform .2s;
+}
 
-
+.house-card:hover, .service-card-wrapper:hover {
+    transform: scale(1.02);
+}
 
 .house-card .card-body {
     background-color: #302A2A;
