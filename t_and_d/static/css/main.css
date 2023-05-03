@@ -133,11 +133,6 @@
 
 .house-card .card-body p.house-properties-body {}
 
-.btn.btn-yellow {
-    background: #FFEE95;
-    color: var(--bs-black);
-    border-style: none;
-}
 
 .btn.tab {
     margin: 1rem;

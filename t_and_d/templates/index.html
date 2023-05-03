@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-T&D | Главная
+Таунхаусы и Дома | Главная
 {% endblock %}
 
 {% block content %}
@@ -33,7 +33,7 @@ T&D | Главная
                                 </p>
                             </div>
                         </div>
-                        <a class="btn btn-lg me-2 btn-yellow" role="button" href="#calculator">
+                        <a class="btn btn-lg me-2 btn-yellow mt-3" role="button" href="#calculator">
                             Рассчитать стоимость ипотеки
                         </a>
                     </div>
@@ -231,6 +231,87 @@ T&D | Главная
 <!-- calculator -->
 <a name="calculator"></a>
 {% include "calculator.html" %}
+
+<a name="reviews"></a>
+<div class="container py-4 py-xl-5">
+    <div class="row mb-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <h2>Отзывы</h2>
+        </div>
+    </div>
+
+    <div class="row gy-4 row-cols-1 row-cols-md-2">
+        {% for review in reviews %}
+        <div class="col">
+            <div>
+                <h5 class="bg-light border rounded border-0 border-light p-4 shadow">
+                    {{review.text}}
+                </h5>
+                <div class="d-flex">
+                    <div>
+                        <h5 class="fw-bold text-yellow mb-0">{{review.name}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col">
+            <div id="newReview">
+                <h1 class="d-flex flex-column bg-light border rounded border-0 border-light p-4 shadow justify-content-center align-items-center w-100"
+                    onclick='newReview(this)' style='min-height: 100px;'>
+                    <i class="bi bi-plus-circle-fill"></i>
+                    <span class="fs-3 text-center mt-1">Оставить отзыв</span>
+                </h1>
+                <div class="d-flex w-100">
+                    <div class="w-100 mt-2 d-flex justify-content-center">
+                        <h5 class="fw-bold text-yellow mb-0"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-yellow-2 {
+        background-color: #FFEE95 !important;
+        border: 1px solid #ced4da;
+    }
+</style>
+
+<script>
+    function newReview(div) {
+        console.log(div);
+        div.nextElementSibling.querySelector('h5').outerHTML = `<input class="form-control rounded h-100 w-75 mx-2" placeholder='Ваше имя'><button class="btn btn-yellow-2 w-25" onclick="saveReview(this)"><i class="bi bi-check"></i></button>`
+        div.outerHTML = `<div class="bg-light rounded p-4 shadow d-flex justify-content-center h-75 w-100"><textarea class="form-control rounded h-100 w-100" placeholder='Текст отзыва'></textarea></div>`
+    }
+
+    function saveReview(btn) {
+        parent = btn.closest('#newReview');
+        text = parent.querySelector('textarea').value;
+        name = parent.querySelector('input').value;
+        if (text.trim() == '') {
+            return alert('Отзыв не может быть пустым');
+        }
+        $.ajax({
+            url: '/add_review',
+            type: "POST",
+            data: {
+                csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                text: text,
+                name: name,
+            },
+            dataType: "json",
+            success: function (data) {
+                window.location += '#reviews';
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("Ошибка! Отзыв не был оставлен");
+            }
+        });
+    }
+</script>
 
 <!-- contact-form2 -->
 <a name="contact-form2"></a>

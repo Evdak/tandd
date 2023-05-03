@@ -241,3 +241,31 @@ class Request(models.Model):
     class Meta:
         verbose_name = "Заявка"
         verbose_name_plural = "Заявки"
+
+
+class Review(models.Model):
+    name = models.CharField(
+        'Имя',
+        max_length=255,
+        blank=True,
+        default='Аноним',
+    )
+
+    text = models.TextField(
+        'Текст отзыва',
+    )
+
+    time_created = models.DateTimeField(
+        'Дата создания',
+        editable=False,
+        auto_now_add=True,
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self) -> str:
+        return f"{self.name}: {self.text[:15]}..."
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"

@@ -24,6 +24,10 @@
     min-height: 400px;
 }
 
+#giveaway b {
+    color: yellow;
+}
+
 #giveaway::before {
     content: "";
     position: absolute;

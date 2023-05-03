@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest, JsonResponse
 
 from offers import models
 from tgbot import models as tgbot_models
@@ -8,9 +8,11 @@ from telegram_bot import bot
 
 def index_view(request: HttpRequest, data: dict = {}):
     offers = models.Offer.objects.all()
+    reviews = models.Review.objects.all()
     data.update(
         {
             "offers": offers,
+            "reviews": reviews,
         }
     )
 
@@ -56,3 +58,25 @@ def contact_form_view(request: HttpRequest):
         )
 
     return index_view(request, {"alert": "Ваша заявка принята"})
+
+
+def add_review(request: HttpRequest):
+    name = request.POST.get('name')
+    text = request.POST.get('text')
+
+    print(name, text)
+
+    if not text:
+        return HttpResponseBadRequest('Не удалось добавить отзыв')
+
+    if not name:
+        name = 'Аноним'
+
+    rev = models.Review.objects.create(
+        name=name,
+        text=text,
+    )
+
+    rev.save()
+
+    return JsonResponse({"result": 'Отзыв добавлен!'})
