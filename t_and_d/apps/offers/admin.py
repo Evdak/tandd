@@ -121,3 +121,17 @@ class RequestAdmin(admin.ModelAdmin):
     ]
 
     list_filter = list_display.copy()
+
+
+@admin.register(models.Review)
+class ReviewAdmin(admin.ModelAdmin):
+    ordering = ('-time_created',)
+
+    list_display = [
+        'id',
+        'name',
+        'text',
+        'time_created',
+    ]
+
+    list_filter = list_display.copy()
