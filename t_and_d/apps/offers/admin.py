@@ -7,34 +7,34 @@ import jazzmin.templates
 @admin.register(models.Offer)
 class OfferAdmin(admin.ModelAdmin):
     list_filter = [
-        'id',
-        'title',
-        'price',
-        'house_area',
-        'territory_area',
-        'territory_area_points',
-        'room_count',
-        'exit_to_the_terrace',
-        'deadline',
-        'deadline_points',
-        'finishing',
-        'description',
-        'address',
+        "id",
+        "title",
+        "price",
+        "house_area",
+        "territory_area",
+        "territory_area_points",
+        "room_count",
+        "exit_to_the_terrace",
+        "deadline",
+        "deadline_points",
+        "finishing",
+        "description",
+        "address",
     ]
 
     list_display = [
-        'image_preview',
-        'id',
-        'title',
-        'get_price',
-        'get_house_area',
-        'get_territory_area',
-        'room_count',
-        'exit_to_the_terrace',
-        'get_deadline',
-        'finishing',
-        'description',
-        'address',
+        "image_preview",
+        "id",
+        "title",
+        "get_price",
+        "get_house_area",
+        "get_territory_area",
+        "room_count",
+        "exit_to_the_terrace",
+        "get_deadline",
+        "finishing",
+        "description",
+        "address",
     ]
 
     def image_preview(self, obj: models.Offer):
@@ -52,25 +52,25 @@ class OfferAdmin(admin.ModelAdmin):
     def get_deadline(self, obj: models.Offer):
         return obj.get_deadline()
 
-    image_preview.short_description = 'Главное фото'
-    get_price.short_description = 'Цена'
-    get_house_area.short_description = 'Площадь дома'
-    get_territory_area.short_description = 'Площадь территории'
-    get_deadline.short_description = 'Сроки'
+    image_preview.short_description = "Главное фото"
+    get_price.short_description = "Цена"
+    get_house_area.short_description = "Площадь дома"
+    get_territory_area.short_description = "Площадь территории"
+    get_deadline.short_description = "Сроки"
 
     class Media:
         css = {
             "all": ["css/offer_admin.css"],
         }
-        js = ['js/offer_admin.js']
+        js = ["js/offer_admin.js"]
 
 
 @admin.register(models.OfferPhoto)
 class OfferPhotoAdmin(admin.ModelAdmin):
     list_display = [
-        'image_preview',
-        'id',
-        'file',
+        "image_preview",
+        "id",
+        "file",
     ]
 
     list_filter = list_display.copy()[1:]
@@ -82,9 +82,9 @@ class OfferPhotoAdmin(admin.ModelAdmin):
 @admin.register(models.OfferPhotoMain)
 class OfferPhotoMainAdmin(admin.ModelAdmin):
     list_display = [
-        'image_preview',
-        'id',
-        'file',
+        "image_preview",
+        "id",
+        "file",
     ]
 
     list_filter = list_display.copy()[1:]
@@ -96,9 +96,9 @@ class OfferPhotoMainAdmin(admin.ModelAdmin):
 @admin.register(models.OfferPhotoPlan)
 class OfferPhotoPlanAdmin(admin.ModelAdmin):
     list_display = [
-        'image_preview',
-        'id',
-        'file',
+        "image_preview",
+        "id",
+        "file",
     ]
 
     list_filter = list_display.copy()[1:]
@@ -109,15 +109,15 @@ class OfferPhotoPlanAdmin(admin.ModelAdmin):
 
 @admin.register(models.Request)
 class RequestAdmin(admin.ModelAdmin):
-    ordering = ('-time_created',)
+    ordering = ("-time_created",)
 
     list_display = [
-        'id',
-        'name',
-        'phone',
-        'email',
-        'message',
-        'time_created',
+        "id",
+        "name",
+        "phone",
+        "email",
+        "message",
+        "time_created",
     ]
 
     list_filter = list_display.copy()
@@ -125,13 +125,14 @@ class RequestAdmin(admin.ModelAdmin):
 
 @admin.register(models.Review)
 class ReviewAdmin(admin.ModelAdmin):
-    ordering = ('-time_created',)
+    ordering = ("-time_created",)
 
     list_display = [
-        'id',
-        'name',
-        'text',
-        'time_created',
+        "id",
+        "name",
+        "text",
+        "is_active",
+        "time_created",
     ]
 
     list_filter = list_display.copy()
