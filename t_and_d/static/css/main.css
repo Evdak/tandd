@@ -234,3 +234,12 @@
 .justify-content-end {
     justify-content: flex-end !important;
 }
+
+.alert {
+    right: 5vw;
+    position: fixed;
+    bottom: 80;
+    z-index: 1000;
+    width: 90vw;
+    left: 5vw;
+}

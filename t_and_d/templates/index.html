@@ -10,6 +10,7 @@
 <link href='{% static "/css/giveaway.css" %}' rel='stylesheet' type='text/css'>
 <script src='{% static "/js/main.js" %}'></script>
 <!-- main-photo -->
+
 <section>
     <div id="main-photo">
         <div class="container h-100">
@@ -241,7 +242,7 @@
     </div>
 
     <div class="row gy-4 row-cols-1 row-cols-md-2">
-        {% for review in reviews %}
+        {% for review in reviews|slice:":6" %}
         <div class="col">
             <div>
                 <h5 class="bg-light border rounded border-0 border-light p-4 shadow">
@@ -255,7 +256,40 @@
             </div>
         </div>
         {% endfor %}
-        <div class="col">
+    </div>
+    {% if reviews.count >= 6 %}
+    <div class="row d-flex justify-content-center my-3" id="show-more">
+        <div class="col-12 col-md-6 text-center">
+            <button class="btn btn-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-reviews"
+                aria-expanded="false" aria-controls="collapse-reviews"
+                onclick="this.textContent = (this.getAttribute('aria-expanded') === 'false' ? 'Показать еще' : 'Скрыть');">
+                Показать еще
+            </button>
+        </div>
+    </div>
+    <div class="collapse" id="collapse-reviews">
+        <div class="row gy-4 row-cols-1 row-cols-md-2">
+            {% for review in reviews|slice:"6:" %}
+            <div class="col">
+                <div>
+                    <h5 class="bg-light border rounded border-0 border-light p-4 shadow">
+                        {{review.text}}
+                    </h5>
+                    <div class="d-flex">
+                        <div>
+                            <h5 class="fw-bold text-yellow mb-0">{{review.name}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="row d-flex justify-content-center my-4">
+        <div class="col-12 col-md-6">
             <div id="newReview">
                 <h1 class="d-flex flex-column bg-light border rounded border-0 border-light p-4 shadow justify-content-center align-items-center w-100"
                     onclick='newReview(this)' style='min-height: 100px;'>
@@ -270,6 +304,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <style>
@@ -303,10 +338,11 @@
             },
             dataType: "json",
             success: function (data) {
-                window.location += '#reviews';
+                window.location.hash = '#reviews';
                 window.location.reload();
             },
             error: function (data) {
+                console.log(data);
                 alert("Ошибка! Отзыв не был оставлен");
             }
         });

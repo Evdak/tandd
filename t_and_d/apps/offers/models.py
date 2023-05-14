@@ -3,12 +3,10 @@ from django.utils.safestring import mark_safe
 
 
 class OfferPhoto(models.Model):
-    file = models.ImageField('Файл с фото', upload_to='offer_photo')
+    file = models.ImageField("Файл с фото", upload_to="offer_photo")
 
     def image_preview(self):
-        return mark_safe(
-            str(self)
-        )
+        return mark_safe(str(self))
 
     def __str__(self) -> str:
         return '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
@@ -23,12 +21,10 @@ class OfferPhoto(models.Model):
 
 
 class OfferPhotoMain(models.Model):
-    file = models.ImageField('Файл с фото', upload_to='offer_photo_main')
+    file = models.ImageField("Файл с фото", upload_to="offer_photo_main")
 
     def image_preview(self):
-        return mark_safe(
-            str(self)
-        )
+        return mark_safe(str(self))
 
     def __str__(self) -> str:
         return '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
@@ -43,12 +39,10 @@ class OfferPhotoMain(models.Model):
 
 
 class OfferPhotoPlan(models.Model):
-    file = models.ImageField('Файл с фото', upload_to='offer_photo_plan')
+    file = models.ImageField("Файл с фото", upload_to="offer_photo_plan")
 
     def image_preview(self):
-        return mark_safe(
-            str(self)
-        )
+        return mark_safe(str(self))
 
     def __str__(self) -> str:
         return '<img src="{url}"  style="width: 12vw; height: auto;" />'.format(
@@ -64,102 +58,102 @@ class OfferPhotoPlan(models.Model):
 
 class Offer(models.Model):
     title = models.CharField(
-        'Название проекта',
+        "Название проекта",
         max_length=255,
     )
 
     price = models.PositiveBigIntegerField(
-        'Цена',
+        "Цена",
     )
 
     house_area = models.FloatField(
-        'Площадь дома (м²)',
+        "Площадь дома (м²)",
     )
 
     territory_area = models.FloatField(
-        'Площадь земли',
+        "Площадь земли",
     )
 
     territory_area_points = models.CharField(
-        'Единицы измерения площади земли',
+        "Единицы измерения площади земли",
         max_length=255,
         choices=(
-            ('м²', 'м²'),
-            ('км²', 'км²'),
-            ('сот.', 'сот.'),
-            ('а', 'а'),
-            ('га', 'га'),
+            ("м²", "м²"),
+            ("км²", "км²"),
+            ("сот.", "сот."),
+            ("а", "а"),
+            ("га", "га"),
         ),
     )
 
     room_count = models.PositiveIntegerField(
-        'Количество комнат',
+        "Количество комнат",
     )
 
     floor_count = models.PositiveIntegerField(
-        'Количество этажей',
+        "Количество этажей",
     )
 
     exit_to_the_terrace = models.BooleanField(
-        'Выход на террасу',
+        "Выход на террасу",
     )
 
     deadline = models.FloatField(
-        'Сроки работ',
+        "Сроки работ",
     )
 
     deadline_points = models.CharField(
-        'Единицы измерения сроков работ',
+        "Единицы измерения сроков работ",
         max_length=255,
         choices=(
-            ('час', 'час'),
-            ('часа', 'часа'),
-            ('часов', 'часов'),
-            ('день', 'день'),
-            ('дня', 'дня'),
-            ('дней', 'дней'),
-            ('неделю', 'неделю'),
-            ('недели', 'недели'),
-            ('недель', 'недель'),
-            ('месяц', 'месяц'),
-            ('месяца', 'месяца'),
-            ('месяцев', 'месяцев'),
-            ('год', 'год'),
-            ('года', 'года'),
-            ('лет', 'лет'),
+            ("час", "час"),
+            ("часа", "часа"),
+            ("часов", "часов"),
+            ("день", "день"),
+            ("дня", "дня"),
+            ("дней", "дней"),
+            ("неделю", "неделю"),
+            ("недели", "недели"),
+            ("недель", "недель"),
+            ("месяц", "месяц"),
+            ("месяца", "месяца"),
+            ("месяцев", "месяцев"),
+            ("год", "год"),
+            ("года", "года"),
+            ("лет", "лет"),
         ),
     )
 
     finishing = models.CharField(
-        'Отделка',
+        "Отделка",
         max_length=255,
         choices=(
             ("Черновая", "Черновая"),
             ("Предчистовая", "Предчистовая"),
-            ("Чистовая", 'Чистовая'),
+            ("Чистовая", "Чистовая"),
         ),
     )
 
     description = models.TextField(
-        'Описание',
+        "Описание",
     )
 
     main_photo = models.ForeignKey(
         OfferPhotoMain,
         on_delete=models.SET_NULL,
-        verbose_name='Главное фото',
+        verbose_name="Главное фото",
         null=True,
     )
 
     photo = models.ManyToManyField(
         OfferPhoto,
-        verbose_name='Фото',
+        verbose_name="Фото",
         blank=True,
     )
 
     plan_photo = models.ManyToManyField(
         OfferPhotoPlan,
-        verbose_name='План дома',
+        verbose_name="План дома",
         blank=True,
     )
 
@@ -175,7 +169,7 @@ class Offer(models.Model):
         verbose_name_plural = "Предложения"
 
     def get_price(self):
-        return f'{self.price:,}'.replace(',', ' ') + " ₽"
+        return f"{self.price:,}".replace(",", " ") + " ₽"
 
     def get_house_area(self):
         return f"{self.house_area}  м²"
@@ -190,7 +184,7 @@ class Offer(models.Model):
         return f"{self.deadline} {self.deadline_points}"
 
     def get_address(self):
-        return self.address.replace(" ", '+') if self.address else "Казань"
+        return self.address.replace(" ", "+") if self.address else "Казань"
 
     def image_preview(self):
         return mark_safe(
@@ -204,31 +198,31 @@ class Offer(models.Model):
 
 class Request(models.Model):
     name = models.CharField(
-        'Имя',
+        "Имя",
         max_length=255,
         null=True,
         blank=True,
     )
     phone = models.CharField(
-        'Телефон',
+        "Телефон",
         max_length=255,
         null=True,
         blank=True,
     )
     email = models.CharField(
-        'Email',
+        "Email",
         max_length=255,
         null=True,
         blank=True,
     )
     message = models.CharField(
-        'Сообщение',
+        "Сообщение",
         max_length=255,
         null=True,
         blank=True,
     )
     time_created = models.DateTimeField(
-        'Дата создания',
+        "Дата создания",
         editable=False,
         auto_now_add=True,
         null=True,
@@ -245,22 +239,29 @@ class Request(models.Model):
 
 class Review(models.Model):
     name = models.CharField(
-        'Имя',
+        "Имя",
         max_length=255,
         blank=True,
-        default='Аноним',
+        default="Аноним",
     )
 
     text = models.TextField(
-        'Текст отзыва',
+        "Текст отзыва",
     )
 
     time_created = models.DateTimeField(
-        'Дата создания',
+        "Дата создания",
         editable=False,
         auto_now_add=True,
         null=True,
         blank=True,
+    )
+
+    is_active = models.BooleanField(
+        "Отображать на сайте",
+        default=True,
+        blank=False,
+        null=False,
     )
 
     def __str__(self) -> str:
